@@ -11,18 +11,18 @@ class Ai:
 
     # Метод возвращает следующий ход компьютера
     def get_next_move(self):
-        # Получаем список доступных ходов
+
         avl_moves = self.board.get_all_avl_moves(self.side)
 
         moves_count = self.board.get_moves_count()
         random.seed()
         random_move = avl_moves[random.randint(0, len(avl_moves) - 1)]
 
-        # Первый ход выбирается компьютером случайным образом
+
         if moves_count == 0 or moves_count == 1:
             return random_move
 
-        # Иначе нам нужно выбрать ход с максимальной оценкой
+
         max_rating = -sys.maxsize
         move_with_max_rating = random_move
         d = 2
@@ -37,7 +37,7 @@ class Ai:
                 max_rating = rating
                 move_with_max_rating = move
 
-        # Возвращаем найденный ход
+
         return move_with_max_rating
 
     # Метод возвращает оценку хода
@@ -51,8 +51,6 @@ class Ai:
         op_side = OPPOSITE_SIDE[side]
         avl_moves = self.board.get_all_avl_moves(op_side)
 
-        # Обрабатываем особую ситуацию: нет доступных ходов, но король не находится под шахом
-        # Это означает ничью и оценка позиции при этом равна 0
         if len(avl_moves) == 0:
             if not self.board.is_strike_figure(self.board.kings_dict[op_side]):
                 return 0

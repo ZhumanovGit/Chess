@@ -45,7 +45,7 @@ class King(Figure):
                 continue
             result.append((r1, c1))
 
-        # Возвращаем результат
+
         return result
 
 
@@ -71,7 +71,7 @@ class Queen(Figure):
                 if figure is not None:
                     break
 
-        # Возвращаем результат
+
         return result
 
 
@@ -97,7 +97,7 @@ class Rook(Figure):
                 if figure is not None:
                     break
 
-        # Возвращаем результат
+
         return result
 
 
@@ -123,7 +123,7 @@ class Bishop(Figure):
                 if figure is not None:
                     break
 
-        # Возвращаем результат
+
         return result
 
 
@@ -143,7 +143,7 @@ class Knight(Figure):
                 continue
             result.append((r1, c1))
 
-        # Возвращаем результат
+
         return result
 
 
@@ -152,7 +152,6 @@ class Pawn(Figure):
     def __init__(self, r, c, side, board):
         Figure.__init__(self, 'sprites/' + side + 'Pawn.png', r, c, side, board)
 
-        # Выбираем направление движения пешки в зависимости от того, где находится её стартовая позиция
         if self.row == 1:
             self.direction = 1
         if self.row == 6:
@@ -162,14 +161,14 @@ class Pawn(Figure):
         result = []
 
         if PAWN_MOVES in args or not args:
-            # Проверяем возможность хода на одну клетку вперед
+
             r1 = self.row + self.direction
             c = self.col
             if self.is_valid_pos(r1, c):
                 if self.board.get_figure(r1, c) is None:
                     result.append((r1, c))
 
-            # Проверяем возможность хода на две клетки вперед
+
             if self.row == 1 or self.row == 6:
                 r2 = self.row + 2 * self.direction
                 if self.is_valid_pos(r2, c):
@@ -177,7 +176,7 @@ class Pawn(Figure):
                         result.append((r2, c))
 
         if PAWN_TAKES in args or not args:
-            # Ищем взятия (за исключением взятия на проходе, которое требует информации о предыдущем ходе) и защиты
+
             offsets = (-1, 1)
             r1 = self.row + self.direction
             for offset in offsets:
@@ -186,5 +185,5 @@ class Pawn(Figure):
                     continue
                 result.append((r1, c1))
 
-        # Возвращаем результат
+
         return result
